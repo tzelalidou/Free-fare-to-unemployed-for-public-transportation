@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h1>This is ADMIN PAGE</h1>
+</head>
+<body>
+<input type="button" value="add" id="addbtn" >
+
+
+<script type="text/javascript">
+    document.getElementById("addbtn").onclick = function () {
+        location.href = "/admin/add";
+    };
+</script>
+<input type="button" value="alter" id="alterbtn" >
+<script type="text/javascript">
+document.getElementById("alterbtn").onclick = function () {
+location.href = "/admin/alter";
+};
+</script>
+
+<input type="button" value="delete" id="deletebtn" >
+<script type="text/javascript">
+    document.getElementById("deletebtn").onclick = function () {
+        location.href = "/admin/delete";
+    };
+</script>
+<br><a href="/logout">logout</a>
+</body>
+</html>
