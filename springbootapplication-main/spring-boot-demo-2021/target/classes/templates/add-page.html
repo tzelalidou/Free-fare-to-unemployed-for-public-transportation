@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Title</title>
 </head>
 <body>
 <h1>ADD USER PAGE</h1>
+<form action="#" method="post" th:action="@{/admin/add}" th:object="${newuser}">
+    <label for="firstName"><b>First Name </b></label>
+    <input type="text" th:field="*{firstName}" placeholder="Enter First Name"  name="firstName" id="firstName"    required   />
+    <label for="lastname"><b>Last Name</b></label>
+    <input type="text" th:field="*{lastName}" placeholder="Enter Last Name" name="lastname" id="lastname" required>
+    <label for="email"><b>Email Address:</b></label>
+    <input type="text" th:field="*{email}" placeholder="Enter your Email Address" name="email" id="email" >
+
+    <label for="role"><b>Role</b></label>
+    <input type="text" th:field="*{authority}" placeholder="Role" name="role" id="role" required>
+    <label for="username"><b>Username</b></label>
+    <input type="text" th:field="*{username}" placeholder="Enter Username" name="username" id="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" th:field="*{password}" placeholder="Enter Password" name="psw" id="psw" required>
+    <input type="submit" style="width: 80px;" />
+    <input type="reset" value="Reset" style="width: 80px;" />
+
+
+</form>
 <br><a href="/logout">logout</a>
 </body>
 </html>
+

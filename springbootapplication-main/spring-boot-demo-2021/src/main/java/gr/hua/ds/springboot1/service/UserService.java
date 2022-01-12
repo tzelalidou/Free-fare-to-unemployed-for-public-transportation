@@ -1,10 +1,15 @@
 package gr.hua.ds.springboot1.service;
 import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.repository.UserRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Service
 
 public class UserService {
@@ -27,8 +32,8 @@ public class UserService {
     }
 
     // save a user
-    public void saveUser(User usr) {
-        userRepository.saveAndFlush(usr);
+    public User saveUser(User usr) {
+        return userRepository.save(usr);
     }
 
     // remove a user
@@ -40,6 +45,14 @@ public class UserService {
     public void removeUserById(int id) {
         userRepository.deleteById(id);
     }
+
+    //get all the unemployed
+    public List<User> findUnemployed(List<User> users){
+
+        return users;
+    }
+
+
 }
 
 

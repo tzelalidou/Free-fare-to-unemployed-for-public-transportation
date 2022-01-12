@@ -14,17 +14,17 @@ public class Application {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "yearofunemployement")
+    @Column(name = "yearOfUnemployment")
     private Date yearOfUnemployment;
 
-    @Column(name = "status")
+    @Column(name = "applicationStatus")
     private int applicationStatus;
 
-    @Column(name = "img_name")
+    @Column(name = "imgName")
     private String imgName;
 
     @Id
-    @Column(name = "amka")
+    @Column(name = "amkaNumber", nullable = false)
     private String amkaNumber;
 
 
@@ -33,17 +33,19 @@ public class Application {
 
     }
 
-    public Application(Date birthDate, String address, Date yearOfUnemployment, int applicationStatus, String imgName, String amkaNumber) {
-        this.birthDate = birthDate;
-        this.address = address;
-        this.yearOfUnemployment = yearOfUnemployment;
-        this.applicationStatus = applicationStatus;
-        this.imgName = imgName;
-        this.amkaNumber = amkaNumber;
-    }
-    @ManyToOne
-    @JoinColumn (name = "amkaNumber")
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "user_id")
     private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getImgName() {
         return imgName;
@@ -52,6 +54,7 @@ public class Application {
     public void setImgName(String imgName) {
         this.imgName = imgName;
     }
+
 
     public Date getBirthDate() {
         return birthDate;
