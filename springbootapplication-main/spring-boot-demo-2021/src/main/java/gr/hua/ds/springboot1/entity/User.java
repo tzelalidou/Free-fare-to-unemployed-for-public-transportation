@@ -1,6 +1,8 @@
 package gr.hua.ds.springboot1.entity;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -45,7 +47,7 @@ public class User {
     }
 
     @OneToMany(cascade= CascadeType.ALL, mappedBy="user", fetch =FetchType.EAGER)
-    private Set<Application> applications=new HashSet<>();
+    private List<Application> applications=new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -95,12 +97,8 @@ public class User {
         this.enabled = enable;
     }
 
-    public Set<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(Set<Application> applications) {
-        this.applications = applications;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -117,7 +115,7 @@ public class User {
     // add convenience methods for bi-directional relation
     public void add(Application application) {
         if (applications == null) {
-            applications = new HashSet<>();
+            applications = new ArrayList<>();
             applications.add(application);
             application.setUser(this);
         }

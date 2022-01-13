@@ -8,18 +8,19 @@ CREATE TABLE IF NOT EXISTS `user` (
                                       `password` varchar(100) NOT NULL,
                                       `enabled` tinyint(1) NOT NULL,
                                       `authority` varchar(50) NOT NULL,
-                                      PRIMARY KEY (`id`)
+                                      PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `application` (
-                                             `amkaNumber` varchar(15) NOT NULL,
-                                             `birthDate` date NOT NULL,
+                                             `aid` int NOT NULL AUTO_INCREMENT,
+                                             `amkanumber` bigint NOT NULL,
+                                             `birthdate` date NOT NULL,
                                              `address` varchar(50) NOT NULL,
-                                             `yearOfUnemployment` date NOT NULL,
-                                             `imgName` varchar(20) NOT NULL,
-                                             `applicationStatus` tinyint(1) NOT NULL,
+                                             `yearofunemployment` date NOT NULL,
+                                             `imgname` varchar(20) NOT NULL,
+                                             `applicationstatus` tinyint(1) NOT NULL,
                                              `user_id` int NOT NULL,
-                                             PRIMARY KEY (`amkaNumber`),
+                                             PRIMARY KEY (aid),
                                              FOREIGN KEY (user_id) REFERENCES user (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,3 +40,4 @@ select * from application;
 DROP TABLE application;
 DROP TABLE user;
 select * from user where authority = 'ROLE_ADMIN';
+select * from application where amkaNumber = '15101993294';

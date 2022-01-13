@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.Collections;
-import java.util.List;
+
 
 @Service
 public class ApplicationService {
 
-    private ApplicationRepository applicationRepository;
+    private final ApplicationRepository applicationRepository;
 
     @Autowired
     public ApplicationService(ApplicationRepository applicationRepository) {
@@ -22,9 +21,10 @@ public class ApplicationService {
 
     // get all the applications
     public List<Application> getApplications() {
+
         return applicationRepository.findAll();
     }
-
+/*
     // get all applications that need to be validated by OAED
     public List<Application> getApplicationsOAED() {
         return applicationRepository.findAllById(Collections.singleton(0));
@@ -34,6 +34,7 @@ public class ApplicationService {
     public List<Application> getApplicationsOASA() {
         return applicationRepository.findAllById(Collections.singleton(1));
     }
+    */
 
     // get an application by id
     public Application getApplication(int id) {

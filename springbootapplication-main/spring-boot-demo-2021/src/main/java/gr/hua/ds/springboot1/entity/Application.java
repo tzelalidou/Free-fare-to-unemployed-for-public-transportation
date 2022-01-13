@@ -7,35 +7,43 @@ import java.util.*;
 @Entity
 @Table(name = "application")
 public class Application {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="aid")
+    private int aid;
+
+    @Column(name = "amkanumber", nullable = false)
+    private long amkanumber;
 
     @Column(name = "birthdate")
-    private Date birthDate;
+    private Date birthdate;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name = "yearOfUnemployment")
-    private Date yearOfUnemployment;
+    @Column(name = "yearofunemployment")
+    private Date yearofunemployment;
 
-    @Column(name = "applicationStatus")
-    private int applicationStatus;
+    @Column(name = "applicationstatus")
+    private int applicationstatus;
 
-    @Column(name = "imgName")
-    private String imgName;
-
-    @Id
-    @Column(name = "amkaNumber", nullable = false)
-    private String amkaNumber;
-
-
+    @Column(name = "imgname")
+    private String imgname;
 
     public Application() {
 
     }
 
+    public Application(long amkanumber, Date birthdate, String address, Date yearofunemployment, int applicationstatus, String imgname) {
+        this.amkanumber = amkanumber;
+        this.birthdate = birthdate;
+        this.address = address;
+        this.yearofunemployment = yearofunemployment;
+        this.applicationstatus = applicationstatus;
+        this.imgname = imgname;
+    }
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,CascadeType.DETACH})
     @JoinColumn (name = "user_id")
     private User user;
 
@@ -47,29 +55,29 @@ public class Application {
         this.user = user;
     }
 
-    public String getImgName() {
-        return imgName;
+    public String getImgname() {
+        return imgname;
     }
 
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
+    public void setImgname(String imgName) {
+        this.imgname = imgName;
     }
 
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(Date birthDate) {
+        this.birthdate = birthDate;
     }
 
-    public Date getYearOfUnemployment() {
-        return yearOfUnemployment;
+    public Date getYearofunemployment() {
+        return yearofunemployment;
     }
 
-    public void setYearOfUnemployment(Date yearOfUnemployment) {
-        this.yearOfUnemployment = yearOfUnemployment;
+    public void setYearofunemployment(Date yearOfUnemployment) {
+        this.yearofunemployment = yearOfUnemployment;
     }
 
     public String getAddress() {
@@ -80,19 +88,19 @@ public class Application {
         this.address = address;
     }
 
-    public int getApplicationStatus() {
-        return applicationStatus;
+    public int getApplicationstatus() {
+        return applicationstatus;
     }
 
-    public void setApplicationStatus(int applicationStatus) {
-        this.applicationStatus = applicationStatus;
+    public void setApplicationstatus(int applicationStatus) {
+        this.applicationstatus = applicationStatus;
     }
 
-    public String getAmkaNumber() {
-        return amkaNumber;
+    public long getAmkanumber() {
+        return amkanumber;
     }
 
-    public void setAmkaNumber(String amkaNumber) {
-        this.amkaNumber = amkaNumber;
+    public void setAmkanumber(long amkaNumber) {
+        this.amkanumber = amkaNumber;
     }
 }

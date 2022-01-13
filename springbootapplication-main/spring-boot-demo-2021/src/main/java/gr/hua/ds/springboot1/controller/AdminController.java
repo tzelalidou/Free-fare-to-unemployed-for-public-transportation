@@ -1,31 +1,27 @@
 package gr.hua.ds.springboot1.controller;
 
 import gr.hua.ds.springboot1.entity.User;
+import gr.hua.ds.springboot1.service.ApplicationService;
 import gr.hua.ds.springboot1.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-
-import static java.awt.SystemColor.window;
-import static java.lang.Boolean.FALSE;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private  final ApplicationService a;
 
-    public AdminController(UserService userService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserService userService, PasswordEncoder passwordEncoder, ApplicationService a) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.a = a;
     }
 
     @GetMapping("/add")
@@ -48,9 +44,21 @@ public class AdminController {
     public ModelAndView alterUser() {
         return new ModelAndView("alter-page");
     }
-    @RequestMapping("/delete")
-    public ModelAndView deleteUser() {
+
+    @GetMapping("/delete")
+    public ModelAndView seeDeleteUser(Model model) {
+        model.addAttribute("allusers",userService.getUsers());
+        model.addAttribute("deluser", new User());
         return new ModelAndView("delete-page");
+    }
+    @PostMapping("/delete")
+    public ModelAndView  deleteUser( @ModelAttribute User deluser) {
+
+        userService.removeUserById(deluser.getId());
+        System.out.println("deleted");
+
+        return new ModelAndView("admin-page");
+
     }
 
 

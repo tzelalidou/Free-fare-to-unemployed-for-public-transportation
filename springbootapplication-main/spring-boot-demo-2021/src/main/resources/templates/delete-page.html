@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index Page</title>
 </head>
 <body>
-<h1>DELETE USER PAGE</h1>
-<br><a href="/logout">logout</a>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>FirstName</th>
+                    <th>LatName</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                    <th>Authority</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="user:${allusers}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.authority}"></td>
+                    <td th:text="${user.email}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <form action="#" method="post" th:action="@{/admin/delete}" th:object="${deluser}">
+                <label for="uid">User id</label>
+                <input type="text" th:field="*{id}" placeholder="Put the id" name="uid" id="uid" required>
+                <input type="submit" style="width: 80px;" th:onclick="Succed process user deleted from the system!" />
+                <a href="/logout">logout</a>
+                <a href="/admin">Return to home page</a>
+            </form>
 </body>
 </html>

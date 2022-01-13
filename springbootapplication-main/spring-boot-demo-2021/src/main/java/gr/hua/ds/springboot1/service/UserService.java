@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -21,9 +23,17 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // get all the users
+    // get all the users except unemployees
     public List<User> getUsers() {
-        return userRepository.findAll();
+        List<User> u=userRepository.findAll();
+        List <User> employees=new ArrayList<>();
+        for(int i=0;i<u.size();i++){
+            if(u.get(i).getAuthority().equals("ROLE_UNEMPLOYED")){
+            }else{
+                employees.add(u.get(i));
+            }
+        }
+        return employees;
     }
 
     // get a user by id
@@ -51,6 +61,8 @@ public class UserService {
 
         return users;
     }
+
+
 
 
 }
