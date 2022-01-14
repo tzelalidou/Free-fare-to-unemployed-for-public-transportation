@@ -1,6 +1,8 @@
 package gr.hua.ds.springboot1.entity;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -16,13 +18,13 @@ public class Application {
     private long amkanumber;
 
     @Column(name = "birthdate")
-    private Date birthdate;
+    private String birthdate;
 
     @Column(name = "address")
     private String address;
 
     @Column(name = "yearofunemployment")
-    private Date yearofunemployment;
+    private String yearofunemployment;
 
     @Column(name = "applicationstatus")
     private int applicationstatus;
@@ -34,7 +36,7 @@ public class Application {
 
     }
 
-    public Application(long amkanumber, Date birthdate, String address, Date yearofunemployment, int applicationstatus, String imgname) {
+    public Application(long amkanumber, String birthdate, String address, String yearofunemployment, int applicationstatus, String imgname) {
         this.amkanumber = amkanumber;
         this.birthdate = birthdate;
         this.address = address;
@@ -63,20 +65,27 @@ public class Application {
         this.imgname = imgName;
     }
 
+    public int getAid() {
+        return aid;
+    }
 
-    public Date getBirthdate() {
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthDate) {
+    public void setBirthdate(String birthDate) {
         this.birthdate = birthDate;
     }
 
-    public Date getYearofunemployment() {
+    public String getYearofunemployment() {
         return yearofunemployment;
     }
 
-    public void setYearofunemployment(Date yearOfUnemployment) {
+    public void setYearofunemployment(String yearOfUnemployment) {
         this.yearofunemployment = yearOfUnemployment;
     }
 
@@ -103,4 +112,5 @@ public class Application {
     public void setAmkanumber(long amkaNumber) {
         this.amkanumber = amkaNumber;
     }
+
 }

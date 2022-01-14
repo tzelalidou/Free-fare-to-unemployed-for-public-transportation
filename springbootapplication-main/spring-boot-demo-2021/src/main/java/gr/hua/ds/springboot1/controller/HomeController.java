@@ -16,6 +16,7 @@ public class HomeController {
         model.addAttribute("name", name);
         return "greeting";
     }
+    //edw to template gia na dei t application toy
     @RequestMapping("/unemployed")
     public ModelAndView unemployedDashboard() {
         return new ModelAndView("unemployed-page");

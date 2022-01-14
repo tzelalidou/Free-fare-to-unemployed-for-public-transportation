@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Index Page</title>
+</head>
+<body>
+
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Application Id</th>
+        <th>Amka Number</th>
+        <th>Birthdate</th>
+        <th>Address</th>
+        <th>Year of Unemployment</th>
+        <th>Imgname</th>
+        <th>Id of application owner</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="ap:${applica}">
+        <td th:text="${ap.aid}"></td>
+        <td th:text="${ap.amkanumber}"></td>
+        <td th:text="${ap.birthdate}"></td>
+        <td th:text="${ap.address}"></td>
+        <td th:text="${ap.yearofunemployment}"></td>
+        <td th:text="${ap.imgname}"></td>
+        <td th:text="${ap.applicationstatus}"></td>
+        <td th:text="${ap.user.getId}"></td>
+    </tr>
+    </tbody>
+</table>
+<input type="button" value="confirm" id="acceptbtn" >
+<input type="button" value="deny" id="denybtn" >
+</body>
+</html>

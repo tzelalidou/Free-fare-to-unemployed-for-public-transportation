@@ -35,7 +35,26 @@ public class UserService {
         }
         return employees;
     }
+    public List<User> getUnemployedUsers() {
+        List<User> usrs= userRepository.findAll();
+        List <User> unemployees=new ArrayList<>();
+        for(int i=0;i<usrs.size();i++){
+            if(usrs.get(i).getAuthority().equals("ROLE_UNEMPLOYED")) {
+                unemployees.add(usrs.get(i));
+            }
+        }
+        return unemployees;
+    }
 
+    public User getUnemployedUserByUsername(String username) {
+        List<User> listOfUsers = getUnemployedUsers();
+        for(int i=0;i<listOfUsers.size();i++){
+            if(listOfUsers.get(i).getUsername().equals(username)) {
+                return listOfUsers.get(i);
+            }
+        }
+        return null;
+    }
     // get a user by id
     public User getUser(int id) {
         return userRepository.getById(id);

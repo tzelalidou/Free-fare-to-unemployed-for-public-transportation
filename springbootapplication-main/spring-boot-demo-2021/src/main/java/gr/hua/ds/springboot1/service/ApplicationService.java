@@ -13,7 +13,7 @@ import java.util.*;
 public class ApplicationService {
 
     private final ApplicationRepository applicationRepository;
-
+    private   ArrayList<Application> temp=new ArrayList<>();
     @Autowired
     public ApplicationService(ApplicationRepository applicationRepository) {
         this.applicationRepository = applicationRepository;
@@ -24,6 +24,37 @@ public class ApplicationService {
 
         return applicationRepository.findAll();
     }
+    public List<Application> getApplicationsforOAED() {
+        List<Application> allapl=getApplications();
+        ArrayList<Application> oaed=new ArrayList<>();
+        for(int i=0;i<allapl.size();i++){
+            if(allapl.get(i).getApplicationstatus()==0) {
+                oaed.add(allapl.get(i));
+            }
+        }
+        return oaed;
+    }
+    public Application getApplicationforOAED(int id) {
+        List<Application> allapl=getApplicationsforOAED();
+        for(int i=0;i<allapl.size();i++){
+            if(allapl.get(i).getAid()==id) {
+                return allapl.get(i);
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Application> getTemp() {
+        return temp;
+    }
+    public ArrayList<?> AddAppTemp(Application app) {
+        getTemp().add(app);
+        return temp;
+    }
+    public void dltAppTemp(Application app) {
+        getTemp().remove(app);
+    }
+
 /*
     // get all applications that need to be validated by OAED
     public List<Application> getApplicationsOAED() {

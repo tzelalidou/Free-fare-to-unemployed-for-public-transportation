@@ -16,12 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    private  final ApplicationService a;
 
-    public AdminController(UserService userService, PasswordEncoder passwordEncoder, ApplicationService a) {
+
+    public AdminController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
-        this.a = a;
     }
 
     @GetMapping("/add")
@@ -36,7 +35,7 @@ public class AdminController {
         newuser.setEnabled(1);
         User savedEntitie = userService.saveUser(newuser);
         System.out.println("Entitie id " + savedEntitie.getId());
-        return "UserSuccessPage";
+        return "admin-page";
 
     }
 

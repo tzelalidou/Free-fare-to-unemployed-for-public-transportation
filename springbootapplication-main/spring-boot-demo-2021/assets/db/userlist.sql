@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `application` (
                                              `aid` int NOT NULL AUTO_INCREMENT,
                                              `amkanumber` bigint NOT NULL,
-                                             `birthdate` date NOT NULL,
+                                             `birthdate` varchar(50) NOT NULL,
                                              `address` varchar(50) NOT NULL,
-                                             `yearofunemployment` date NOT NULL,
+                                             `yearofunemployment` varchar(50) NOT NULL,
                                              `imgname` varchar(20) NOT NULL,
                                              `applicationstatus` tinyint(1) NOT NULL,
                                              `user_id` int NOT NULL,
@@ -41,3 +41,5 @@ DROP TABLE application;
 DROP TABLE user;
 select * from user where authority = 'ROLE_ADMIN';
 select * from application where amkaNumber = '15101993294';
+INSERT INTO `user` (`first_name`,`last_name`,`email`,`username`, `password`, `enabled`,`authority`) VALUES
+    ('lefteris','xasan','lefxasan@gmail.com','lefteris', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_OASA');

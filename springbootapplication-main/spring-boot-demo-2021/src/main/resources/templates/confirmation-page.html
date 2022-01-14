@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index Page</title>
 </head>
 <body>
-<input type="button" value="confirm" id="acceptbtn" >
-<input type="button" value="deny" id="denybtn" >
+
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Application Id</th>
+        <th>Amka Number</th>
+        <th>Birthdate</th>
+        <th>Address</th>
+        <th>Year of Unemployment</th>
+        <th>Imgname</th>
+        <th>Id of application owner</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="appli:${allapl}">
+        <td th:text="${appli.aid}"></td>
+        <td th:text="${appli.amkanumber}"></td>
+        <td th:text="${appli.birthdate}"></td>
+        <td th:text="${appli.address}"></td>
+        <td th:text="${appli.yearofunemployment}"></td>
+        <td th:text="${appli.imgname}"></td>
+        <td th:text="${appli.applicationstatus}"></td>
+        <td th:text="${appli.user.getId}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+<form action="#" method="post" th:action="@{/oaed/confirmation}" th:object="${appl}">
+    <label for="aid">Application id</label>
+    <input type="text" th:field="*{aid}" placeholder="Put the id" name="aid" id="aid" required>
+
+    <input type="submit" style="width: 80px;" id="subtn" th:onclick="Succed process user deleted from the system!" />
+
+    <a href="/logout">logout</a>
+    <a href="/oaed">Return to home page</a>
+</form>
+
+
 <br><a href="/logout">logout</a>
 </body>
 </html>
