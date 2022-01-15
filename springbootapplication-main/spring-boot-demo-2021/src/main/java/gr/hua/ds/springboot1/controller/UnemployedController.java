@@ -1,5 +1,6 @@
 package gr.hua.ds.springboot1.controller;
 import gr.hua.ds.springboot1.entity.Application;
+import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.service.ApplicationService;
 import gr.hua.ds.springboot1.service.UserService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -42,9 +43,11 @@ public class UnemployedController {
         // get User username
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-
         appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
-        appl.setApplicationstatus(1);
+        //add in application of user the current application
+        userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
+        appl.getUser().addInApplications(appl);
+        appl.setApplicationstatus(0);
         appl.setImgname("image");
         //appl.setImgname("img"+currentPrincipalName.hashCode()+appl.getAmkanumber().hashCode());
         // save to server.

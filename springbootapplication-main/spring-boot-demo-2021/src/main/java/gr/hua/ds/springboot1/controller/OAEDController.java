@@ -10,11 +10,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityManager;
+
 @RestController
 @RequestMapping("/oaed")
 public class OAEDController {
 
     private final ApplicationService applicationService;
+    public Application tempApp;
 
     public OAEDController( ApplicationService applicationService) {
         this.applicationService = applicationService;
@@ -29,14 +32,30 @@ public class OAEDController {
     @PostMapping("/confirmation")
     public ModelAndView ChooseAppl(@Validated @ModelAttribute Application app, Model model){
         Application app1=applicationService.getApplicationforOAED(app.getAid());
-        
-        model.addAttribute("app", app1);
-        applicationService.AddAppTemp(app1);
-        System.out.println(applicationService.getTemp().get(0).getAid());
-        System.out.println(applicationService.getTemp().get(0).getAmkanumber());
-        model.addAttribute("applica",applicationService.getTemp());
-        return new ModelAndView("OAEDregectaccept");
+        tempApp = app1;
+        tempApp.getUser().addInApplications(tempApp);
 
+        System.out.println(tempApp.toString());
+        model.addAttribute("applica", app1);
+        return new ModelAndView("OAEDregectaccept");
+    }
+
+    @GetMapping("/confirmation/accept")
+    public ModelAndView acceptAppl() {
+
+        tempApp.setApplicationstatus(1);
+        applicationService.saveApplication(tempApp);
+        return new ModelAndView("confirmform-page");
+    }
+
+    @GetMapping("/confirmation/deny")
+    public ModelAndView denyAppl() {
+
+        tempApp.getUser().rmvFromApplications(tempApp);
+        //applicationService.removeApplication(tempApp);
+        System.out.println(tempApp.getUser().getId());
+        System.out.println(tempApp.getUser().getApplications().get(0).toString());
+        return new ModelAndView("denyform-page");
     }
 
 }

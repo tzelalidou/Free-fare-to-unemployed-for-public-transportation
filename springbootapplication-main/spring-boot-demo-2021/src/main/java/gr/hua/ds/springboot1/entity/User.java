@@ -46,7 +46,8 @@ public class User {
         this.enabled = enabled;
     }
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="user", fetch =FetchType.EAGER)
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="user", fetch =FetchType.EAGER,
+    orphanRemoval = true)
     private List<Application> applications=new ArrayList<>();
 
     public String getFirstName() {
@@ -101,6 +102,20 @@ public class User {
         this.id = id;
     }
 
+    public List<Application> getApplications() {
+        return applications;
+    }
+
+    public void addInApplications(Application application) {
+        applications.add(application);
+        application.setUser(this);
+    }
+    public User rmvFromApplications(Application application) {
+        applications.remove(application);
+        application.setUser(null);
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -113,11 +128,5 @@ public class User {
                 '}';
     }
     // add convenience methods for bi-directional relation
-    public void add(Application application) {
-        if (applications == null) {
-            applications = new ArrayList<>();
-            applications.add(application);
-            application.setUser(this);
-        }
-    }
+
 }

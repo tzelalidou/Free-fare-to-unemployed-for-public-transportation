@@ -45,7 +45,7 @@ public class Application {
         this.imgname = imgname;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,CascadeType.DETACH})
     @JoinColumn (name = "user_id")
     private User user;
 
@@ -113,4 +113,16 @@ public class Application {
         this.amkanumber = amkaNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Application{" +
+                "aid=" + aid +
+                ", amkanumber=" + amkanumber +
+                ", birthdate='" + birthdate + '\'' +
+                ", address='" + address + '\'' +
+                ", yearofunemployment='" + yearofunemployment + '\'' +
+                ", applicationstatus=" + applicationstatus +
+                ", imgname='" + imgname + '\'' +
+                '}';
+    }
 }

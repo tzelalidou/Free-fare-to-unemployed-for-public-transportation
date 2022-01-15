@@ -51,8 +51,19 @@ public class ApplicationService {
         getTemp().add(app);
         return temp;
     }
+
     public void dltAppTemp(Application app) {
         getTemp().remove(app);
+    }
+    public List<Application> getApplicationsforOASA() {
+        List<Application> allapl = getApplications();
+        ArrayList<Application> oasa=new ArrayList<>();
+        for(int i=0;i<allapl.size();i++){
+            if(allapl.get(i).getApplicationstatus()==1) {
+                oasa.add(allapl.get(i));
+            }
+        }
+        return oasa;
     }
 
 /*
