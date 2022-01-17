@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <title>Index Page</title>
+    <title>Delete Page</title>
 </head>
+<style>
+    table {
+        color: #37356e;
+    }
+    th, td {
+        color: #f7fafd;
+        background-color: #1d6185;
+        border-radius: 12px;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .button {
+        background-color: #08d;
+        border-radius: 15px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 30px;
+        text-align: center;
+        width: 100%;
+        float: left;
+    }
+
+    .button:active {
+        background-color: #06b;
+    }
+    .center2 {
+        float: left;
+        margin: 0;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: flex;
+    }
+</style>
 <body>
-            <table class="table table-hover">
+            <table class="center">
                 <thead>
                 <tr>
                     <th>User Id</th>
@@ -31,11 +72,23 @@
             </table>
 
             <form action="#" method="post" th:action="@{/admin/delete}" th:object="${deluser}">
-                <label for="uid">User id</label>
-                <input type="text" th:field="*{id}" placeholder="Put the id" name="uid" id="uid" required>
-                <input type="submit" style="width: 80px;" th:onclick="Succed process user deleted from the system!" />
-                <a href="/logout">logout</a>
-                <a href="/admin">Return to home page</a>
+                <div class="center2">
+
+                <input type="text" th:field="*{id}"  class="button" placeholder="Put the Id" name="uid" id="uid" required>
+                <input type="submit" class="button" value="Submit" >
+                <input type="button" class="button" value="Go to Home Page" id="home" >
+                <script type="text/javascript">
+                    document.getElementById("home").onclick = function () {
+                        location.href = "/home";
+                    };
+                </script>
+                <input type="button" class="button" value="Logout" id="logout" >
+                <script type="text/javascript">
+                    document.getElementById("logout").onclick = function () {
+                        location.href = "/logout";
+                    };
+                </script>
+                </div>
             </form>
 </body>
 </html>

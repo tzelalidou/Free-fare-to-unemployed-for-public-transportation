@@ -53,7 +53,7 @@ public class UnemployedController {
         // save to server.
         applicationService.saveApplication(appl);
 
-        return new ModelAndView("applicationform-page");
+        return new ModelAndView("UserSuccessPage");
     }
 
 }

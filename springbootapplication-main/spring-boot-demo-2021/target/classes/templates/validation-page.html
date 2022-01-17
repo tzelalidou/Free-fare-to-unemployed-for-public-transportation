@@ -4,9 +4,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    table {
+        color: #37356e;
+    }
+    th, td {
+        color: #f7fafd;
+        background-color: #1d6185;
+        border-radius: 12px;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .button {
+        background-color: #08d;
+        border-radius: 15px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 30px;
+        text-align: center;
+        width: 100%;
+        float: left;
+    }
+
+    .button:active {
+        background-color: #06b;
+    }
+    .center2 {
+        float: left;
+        margin: 0;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: flex;
+
+
+    }
+</style>
 <body>
 
-<table class="table table-hover">
+<table class="center">
     <thead>
     <tr>
         <th>Application Id</th>
@@ -15,6 +58,10 @@
         <th>Address</th>
         <th>Year of Unemployment</th>
         <th>Imgname</th>
+        <th>Application Status</th>
+        <th>Username of Owner</th>
+
+
         <!--        <th>Id of application owner</th>-->
     </tr>
     </thead>
@@ -28,13 +75,22 @@
         <td th:text="${appli.yearofunemployment}"></td>
         <td th:text="${appli.imgname}"></td>
         <td th:text="${appli.applicationstatus}"></td>
-        <!--        <td th:text="${appli.user.getId}"></td>-->
+        <td th:text="${appli.user.getUsername()}"></td>
     </tr>
     </tbody>
 </table>
 
-<a href="/oasa/validation/done"><input type="button" value="VALIDATION" id="validation" ></a>
-<a href="/oasa"><input type="button" value="GO BACK" id="go_back" ></a>
-<br><a href="/logout">logout</a>
+    <div class="center2">
+<a href="/oasa/validation/done"><input type="button"  class="button" value="Validation" id="validation" ></a>
+<a href="/oasa"><input type="button" value="Go back" class="button"  id="go_back" ></a>
+<input type="button" class="button" value="Logout" id="logout"  >
+<script type="text/javascript">
+    document.getElementById("logout").onclick = function () {
+        location.href = "/logout";
+    };
+</script>
+    </div>
+</div>
+
 </body>
 </html>

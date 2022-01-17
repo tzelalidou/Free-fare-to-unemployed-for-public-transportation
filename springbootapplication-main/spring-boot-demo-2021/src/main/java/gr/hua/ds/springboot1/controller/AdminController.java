@@ -1,7 +1,6 @@
 package gr.hua.ds.springboot1.controller;
 
 import gr.hua.ds.springboot1.entity.User;
-import gr.hua.ds.springboot1.service.ApplicationService;
 import gr.hua.ds.springboot1.service.UserService;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,13 +28,13 @@ public class AdminController {
         return new ModelAndView("add-page");
     }
     @PostMapping("/add")
-    public String createUser(@Validated @ModelAttribute User newuser, Model model){
+    public ModelAndView createUser(@Validated @ModelAttribute User newuser, Model model){
         model.addAttribute("newuser", newuser);
         newuser.setPassword(passwordEncoder.encode(newuser.getPassword()));
         newuser.setEnabled(1);
         User savedEntitie = userService.saveUser(newuser);
         System.out.println("Entitie id " + savedEntitie.getId());
-        return "admin-page";
+        return new ModelAndView("UserSuccessPage");
 
     }
 
@@ -46,7 +45,7 @@ public class AdminController {
 
     @GetMapping("/delete")
     public ModelAndView seeDeleteUser(Model model) {
-        model.addAttribute("allusers",userService.getUsers());
+        model.addAttribute("allusers",userService.getUsersExceptUnemployed());
         model.addAttribute("deluser", new User());
         return new ModelAndView("delete-page");
     }
@@ -56,7 +55,7 @@ public class AdminController {
         userService.removeUserById(deluser.getId());
         System.out.println("deleted");
 
-        return new ModelAndView("admin-page");
+        return new ModelAndView("UserSuccessPage");
 
     }
 

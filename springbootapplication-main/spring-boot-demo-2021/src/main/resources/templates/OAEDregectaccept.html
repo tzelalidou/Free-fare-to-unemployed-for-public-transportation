@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
-    <title>Index Page</title>
+    <meta charset="UTF-8">
+    <title>CHeck Application</title>
 </head>
+<style>
+    table {
+        color: #37356e;
+    }
+    th, td {
+        color: #f7fafd;
+        background-color: #1d6185;
+        border-radius: 12px;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .button {
+        background-color: #08d;
+        border-radius: 15px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 30px;
+        text-align: center;
+        width: 100%;
+        float: left;
+    }
+
+    .button:active {
+        background-color: #06b;
+    }
+    .center2 {
+        float: left;
+        margin: 0;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: flex;
+
+
+    }
+</style>
 <body>
-
-
-<table class="table table-hover">
+<table class="center">
     <thead>
     <tr>
         <th>Application Id</th>
@@ -16,7 +58,7 @@
         <th>Year of Unemployment</th>
         <th>Imgname</th>
         <th>Application status</th>
-        <th>Id of application owner</th>
+        <th>Username of Owner</th>
     </tr>
     </thead>
     <tbody>
@@ -29,11 +71,21 @@
         <td th:text="${ap.yearofunemployment}"></td>
         <td th:text="${ap.imgname}"></td>
         <td th:text="${ap.applicationstatus}"></td>
-        <td th:text="${ap.user.getId}"></td>
+        <td th:text="${ap.user.getUsername()}"></td>
     </tr>
     </tbody>
 </table>
-<a href="/oaed/confirmation/accept"><input type="button" value="confirm" id="acceptbtn" ></a>
-<a href="/oaed/confirmation/deny"><input type="button" value="deny" id="denybtn" ></a>
+
+<div class="center2">
+    <a href="/oaed/confirmation/accept"><input type="button"  class="button" value="Confirm" id="acceptbtn" ></a>
+    <a href="/oaed/confirmation/deny"><input type="button"   class="button"   value="Deny"   id="denybtn" ></a>
+    <input type="button" class="button" value="Logout" id="logout"  >
+    <script type="text/javascript">
+        document.getElementById("logout").onclick = function () {
+            location.href = "/logout";
+        };
+    </script>
+</div>
+
 </body>
 </html>

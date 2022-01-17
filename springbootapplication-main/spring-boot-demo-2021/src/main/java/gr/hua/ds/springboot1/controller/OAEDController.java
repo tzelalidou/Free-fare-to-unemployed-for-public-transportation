@@ -45,7 +45,7 @@ public class OAEDController {
 
         tempApp.setApplicationstatus(1);
         applicationService.saveApplication(tempApp);
-        return new ModelAndView("confirmform-page");
+        return new ModelAndView("UserSuccessPage");
     }
 
     @GetMapping("/confirmation/deny")
@@ -55,7 +55,7 @@ public class OAEDController {
         //applicationService.removeApplication(tempApp);
         System.out.println(tempApp.getUser().getId());
         System.out.println(tempApp.getUser().getApplications().get(0).toString());
-        return new ModelAndView("denyform-page");
+        return new ModelAndView("UserSuccessPage");
     }
 
 }

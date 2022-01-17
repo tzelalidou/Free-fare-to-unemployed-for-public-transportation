@@ -55,6 +55,7 @@ public class ApplicationService {
     public void dltAppTemp(Application app) {
         getTemp().remove(app);
     }
+
     public List<Application> getApplicationsforOASA() {
         List<Application> allapl = getApplications();
         ArrayList<Application> oasa=new ArrayList<>();

@@ -24,7 +24,7 @@ public class UserService {
     }
 
     // get all the users except unemployees
-    public List<User> getUsers() {
+    public List<User> getUsersExceptUnemployed() {
         List<User> u=userRepository.findAll();
         List <User> employees=new ArrayList<>();
         for(int i=0;i<u.size();i++){
@@ -55,6 +55,16 @@ public class UserService {
         }
         return null;
     }
+    public User getUserByUsername(String username) {
+        List<User> listOfUsers =userRepository.findAll();
+        for(int i=0;i<listOfUsers.size();i++){
+            if(listOfUsers.get(i).getUsername().equals(username)) {
+                return listOfUsers.get(i);
+            }
+        }
+        return null;
+    }
+
     // get a user by id
     public User getUser(int id) {
         return userRepository.getById(id);

@@ -1,22 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <title>Index Page</title>
+    <title>Delete Page</title>
 </head>
-<body>
+<style>
+    table {
+        color: #37356e;
+    }
+    th, td {
+        color: #f7fafd;
+        background-color: #1d6185;
+        border-radius: 12px;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .button {
+        background-color: #08d;
+        border-radius: 15px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 30px;
+        text-align: center;
+        width: 100%;
+        float: left;
+    }
 
+    .button:active {
+        background-color: #06b;
+    }
+    .center2 {
+        float: left;
+        margin: 0;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: flex;
+    }
+</style>
 
-<table class="table table-hover">
+<table class="center">
     <thead>
     <tr>
-        <th>Application Id</th>
-        <th>Amka Number</th>
-        <th>Birthdate</th>
-        <th>Address</th>
-        <th>Year of Unemployment</th>
-        <th>Imgname</th>
-        <th>Application status</th>
-        <th>Id of application owner</th>
+        <th> Application Id </th>
+        <th> Amka Number </th>
+        <th> Birthdate </th>
+        <th> Address </th>
+        <th> Year of Unemployment </th>
+        <th> Image Name </th>
+        <th> Application status </th>
+        <th> Username of application owner </th>
     </tr>
     </thead>
     <tbody>
@@ -29,7 +68,7 @@
         <td th:text="${appli.yearofunemployment}"></td>
         <td th:text="${appli.imgname}"></td>
         <td th:text="${appli.applicationstatus}"></td>
-        <td th:text="${appli.user.getId}"></td>
+        <td th:text="${appli.user.getUsername()}"></td>
     </tr>
     </tbody>
 </table>
@@ -38,16 +77,29 @@
 
 
 <form action="#" method="post" th:action="@{/oaed/confirmation}" th:object="${appl}">
-    <label for="aid">Application id</label>
-    <input type="text" th:field="*{aid}" placeholder="Put the id" name="aid" id="aid" required>
 
-    <input type="submit" style="width: 80px;" id="subtn" th:onclick="Succed process user deleted from the system!" />
 
-    <a href="/logout">logout</a>
-    <a href="/oaed">Return to home page</a>
+
+    <div class="center2">
+
+        <input type="text" th:field="*{aid}"  class="button" placeholder="Put the Id" name="aid" id="aid" required>
+        <input type="submit" class="button" value="Submit" value="Check this Application">
+        <input type="button" class="button" value="Go to Home Page" id="home" >
+        <script type="text/javascript">
+            document.getElementById("home").onclick = function () {
+                location.href = "/home";
+            };
+        </script>
+        <input type="button" class="button" value="Logout" id="logout" >
+        <script type="text/javascript">
+            document.getElementById("logout").onclick = function () {
+                location.href = "/logout";
+            };
+        </script>
+    </div>
+
 </form>
 
 
-<br><a href="/logout">logout</a>
 </body>
 </html>

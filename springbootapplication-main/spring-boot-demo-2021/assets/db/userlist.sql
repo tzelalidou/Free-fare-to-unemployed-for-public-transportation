@@ -33,7 +33,8 @@ INSERT INTO `user` (`first_name`,`last_name`,`email`,`username`, `password`, `en
 
 INSERT INTO `application` (`amkaNumber`,`birthDate`,`address`, `yearOfUnemployment`, `imgName`,`user_id`,`applicationStatus`) VALUES
                                                                                                                                   ('15101993294','1993/10/15','Kapadokias 25','2007/03/07', 'mypic.jpg',1, 1),
-                                                                                                                                  ('11081999260','1999/08/11','Pyrgou 13','2004/01/19', 'me.jpg',1, 1);
+                                                                                                                                  ('11081999260','1999/08/11','Pyrgou 13','2004/01/19', 'me.jpg',1, 1),
+                                                                                                                                  ('81123456760','1964/08/11','Sanou 172','2014/12/29', 'image.jpg',1, 1);
 
 select * from user;
 select * from application;
