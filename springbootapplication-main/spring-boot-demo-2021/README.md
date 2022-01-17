@@ -45,12 +45,14 @@ Installation
 git clone https://github.com/tzelalidou/springbootapp.git
 
 
-Some ready inserts in MySQL for quicker check
+*Some ready inserts in MySQL for quicker check
+
 INSERT INTO `user` (`first_name`,`last_name`,`email`,`username`, `password`, `enabled`,`authority`) VALUES
    ('argiris','tsadimas','argiristsad@gmail.com','argiris', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_UNEMPLOYED'),
    ('marianthi','karvoynh','marianthikarv@gmail.com','marianthi', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_OAED'),
    ('lefteris','xasan','lefxasan@gmail.com','lefteris', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_OASA'),
    ('maria','dhmoy','mariadhmoyd@gmail.com','root', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_ADMIN');
+
 
 
 INSERT INTO `application` (`amkaNumber`,`birthDate`,`address`, `yearOfUnemployment`, `imgName`,`user_id`,`applicationStatus`) VALUES
