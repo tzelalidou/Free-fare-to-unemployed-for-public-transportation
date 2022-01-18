@@ -103,6 +103,17 @@ public class ApplicationService {
         applicationRepository.deleteById(id);
     }
 
+    // get Applications of unemployed users by their username.
+    public List<Application> getApplicationsUnemployed(String username) {
+        List<Application> allapl = getApplications();
+        ArrayList<Application> unemp = new ArrayList<>();
+        for(int i=0;i<allapl.size();i++){
+            if(allapl.get(i).getUser().getUsername().equals(username)) {
+                unemp.add(allapl.get(i));
+            }
+        }
+        return unemp;
+    }
     private Connection connect() {
         String username = "root";
         String password = "root";

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `user` (
                                       `first_name` varchar(50) NOT NULL,
                                       `last_name` varchar(50) NOT NULL,
                                       `email` varchar(50) NULL,
-                                      `username` varchar(50) NOT NULL,
+                                      `username` varchar(50) UNIQUE NOT NULL,
                                       `password` varchar(100) NOT NULL,
                                       `enabled` tinyint(1) NOT NULL,
                                       `authority` varchar(50) NOT NULL,
@@ -32,9 +32,9 @@ INSERT INTO `user` (`first_name`,`last_name`,`email`,`username`, `password`, `en
 
 
 INSERT INTO `application` (`amkaNumber`,`birthDate`,`address`, `yearOfUnemployment`, `imgName`,`user_id`,`applicationStatus`) VALUES
-                                                                                                                                  ('15101993294','1993/10/15','Kapadokias 25','2007/03/07', 'mypic.jpg',1, 1),
-                                                                                                                                  ('11081999260','1999/08/11','Pyrgou 13','2004/01/19', 'me.jpg',1, 1),
-                                                                                                                                  ('81123456760','1964/08/11','Sanou 172','2014/12/29', 'image.jpg',1, 1);
+                                                                                                                                  ('15101993294','1993/10/15','Kapadokias 25','2007/03/07', 'mypic.jpg',14, 1),
+                                                                                                                                  ('11081999260','1999/08/11','Pyrgou 13','2004/01/19', 'me.jpg',14, 1),
+                                                                                                                                  ('81123456760','1964/08/11','Sanou 172','2014/12/29', 'image.jpg',14, 1);
 
 select * from user;
 select * from application;
@@ -43,4 +43,4 @@ DROP TABLE user;
 select * from user where authority = 'ROLE_ADMIN';
 select * from application where amkaNumber = '15101993294';
 INSERT INTO `user` (`first_name`,`last_name`,`email`,`username`, `password`, `enabled`,`authority`) VALUES
-    ('lefteris','xasan','lefxasan@gmail.com','lefteris', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_OASA');
+    ('a','xasan','lefxasan@gmail.com','a', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_UNEMPLOYED');

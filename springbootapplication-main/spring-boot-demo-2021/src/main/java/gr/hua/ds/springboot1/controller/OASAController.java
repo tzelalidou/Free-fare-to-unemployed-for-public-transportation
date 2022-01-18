@@ -25,25 +25,30 @@ public class OASAController {
 
     @GetMapping("/validation")
     public ModelAndView doValidation(Model model) {
-        tempAppl = null;
-        if (applicationService.getApplicationsforOASA().size() != 0)
-            tempAppl = (ArrayList<Application>) applicationService.getApplicationsforOASA();
+        try {
+            tempAppl = null;
+            if (applicationService.getApplicationsforOASA().size() != 0)
+                tempAppl = (ArrayList<Application>) applicationService.getApplicationsforOASA();
 
-        model.addAttribute("allapl", tempAppl);
-        model.addAttribute("appl", new Application());
+            model.addAttribute("allapl", tempAppl);
+            model.addAttribute("appl", new Application());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
         return new ModelAndView("validation-page");
     }
 
 
     @GetMapping("/validation/done")
     public ModelAndView successValidation(Model model) {
-        for(int i=0;i<tempAppl.size();i++){
-            if (tempAppl != null) {
+        try {
+            for(int i=0;i<tempAppl.size();i++) {
                 tempAppl.get(i).setApplicationstatus(2);
                 applicationService.saveApplication(tempAppl.get(i));
-            } else{
-                throw new NullPointerException();
             }
+        } catch (Exception e){
+            return new ModelAndView("error-page");
         }
 
         return new ModelAndView("UserSuccessPage");

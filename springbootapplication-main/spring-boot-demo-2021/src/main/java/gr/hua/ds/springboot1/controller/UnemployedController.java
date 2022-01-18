@@ -33,26 +33,45 @@ public class UnemployedController {
     // get the user input from the form into an application object in the model
     @GetMapping("/application")
     public ModelAndView seeForm(Model model) {
-        Application appl = new Application();
-        model.addAttribute("appl", appl);
+        try {
+            Application appl = new Application();
+            model.addAttribute("appl", appl);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
         return new ModelAndView("applicationform-page");
     }
 
     @PostMapping("/application")
     public ModelAndView seeResults(@ModelAttribute("appl") Application appl) {
-        // get User username
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
-        appl.setApplicationstatus(0);
-        appl.setImgname("image");
-        //add in list of applications of user the current application(appl)
-        userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
-        //appl.setImgname("img"+currentPrincipalName.hashCode()+appl.getAmkanumber().hashCode());
-        // save to server.
-        applicationService.saveApplication(appl);
-        userService.saveUser(userService.getUnemployedUserByUsername(currentPrincipalName));
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
+            appl.setApplicationstatus(0);
+            appl.setImgname("image");
+            //add in list of applications of user the current application(appl)
+            userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
+            //appl.setImgname("img"+currentPrincipalName.hashCode()+appl.getAmkanumber().hashCode());
+            // save to server.
+            applicationService.saveApplication(appl);
+            userService.saveUser(userService.getUnemployedUserByUsername(currentPrincipalName));
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
         return new ModelAndView("UserSuccessPage");
+    }
+    @GetMapping("/myapplications")
+    public ModelAndView showApplications(Model model) {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
+            model.addAttribute("allapl", applicationService.getApplicationsUnemployed(username));
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+        return new ModelAndView("myapplications-page");
     }
 
 }

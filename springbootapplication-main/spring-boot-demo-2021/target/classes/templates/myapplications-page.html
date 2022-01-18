@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>My Applications</title>
+</head>
+<style>
+    table {
+        color: #37356e;
+    }
+    th, td {
+        color: #f7fafd;
+        background-color: #1d6185;
+        border-radius: 12px;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button {
+        background-color: #08d;
+        border-radius: 22px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 50px;
+        margin-top: 60px;
+    // outline: 0;
+        text-align: center;
+        width: 16%;
+        position: fixed; /* or absolute */
+        /*top: 50%;*/
+        left: 45%;
+    }
+
+    .button:active {
+        background-color: #06b;
+    }
+    .center2 {
+        float: left;
+        margin: 0;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: flex;
+    }
+</style>
+
+<table class="center">
+    <thead>
+    <tr>
+        <th> Application Id </th>
+        <th> Amka Number </th>
+        <th> Birthdate </th>
+        <th> Address </th>
+        <th> Year of Unemployment </th>
+        <th> Image Name </th>
+        <th> Application status </th>
+        <th> Username of application owner </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="appli:${allapl}">
+        <td th:text="${appli.aid}"></td>
+        <td th:text="${appli.amkanumber}"></td>
+        <td th:text="${appli.birthdate}"></td>
+        <td th:text="${appli.address}"></td>
+        <td th:text="${appli.yearofunemployment}"></td>
+        <td th:text="${appli.imgname}"></td>
+        <td th:if="${appli.applicationstatus == 2}">SUCCESSFUL</td>
+        <td th:if="${appli.applicationstatus != 2}">PENDING</td>
+        <td th:text="${appli.user.getUsername()}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<input type="button" class="button" value="Return" id="return" >
+<script>
+    document.getElementById("return").onclick = function () {
+        location.href = "/unemployed";
+    };
+</script>
+
+</body>
+</html>

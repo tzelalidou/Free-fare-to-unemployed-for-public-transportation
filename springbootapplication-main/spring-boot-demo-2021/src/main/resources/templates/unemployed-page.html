@@ -169,8 +169,13 @@
     };
 </script>
 
+<input type="button" class="button" value="Show Applications" id="show" >
 
-
+<script type="text/javascript">
+    document.getElementById("show").onclick = function () {
+        location.href = "/unemployed/myapplications";
+    };
+</script>
 
 <button onclick="document.getElementById('id01').style.display='block'" class="button" >Delete Your Account</button>
 
@@ -188,6 +193,8 @@
         </div>
     </form>
 </div>
+
+
 
 <script>
     // Get the modal

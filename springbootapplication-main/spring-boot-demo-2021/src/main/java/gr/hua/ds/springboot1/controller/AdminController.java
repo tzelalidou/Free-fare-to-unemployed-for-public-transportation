@@ -30,10 +30,14 @@ public class AdminController {
     @PostMapping("/add")
     public ModelAndView createUser(@Validated @ModelAttribute User newuser, Model model){
         model.addAttribute("newuser", newuser);
-        newuser.setPassword(passwordEncoder.encode(newuser.getPassword()));
-        newuser.setEnabled(1);
-        User savedEntitie = userService.saveUser(newuser);
-        System.out.println("Entitie id " + savedEntitie.getId());
+        try {
+            newuser.setPassword(passwordEncoder.encode(newuser.getPassword()));
+            newuser.setEnabled(1);
+            userService.saveUser(newuser);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
         return new ModelAndView("UserSuccessPage");
 
     }
@@ -45,16 +49,22 @@ public class AdminController {
 
     @GetMapping("/delete")
     public ModelAndView seeDeleteUser(Model model) {
-        model.addAttribute("allusers",userService.getUsersExceptUnemployed());
-        model.addAttribute("deluser", new User());
+        try {
+            model.addAttribute("allusers",userService.getUsersExceptUnemployed());
+            model.addAttribute("deluser", new User());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
         return new ModelAndView("delete-page");
     }
     @PostMapping("/delete")
     public ModelAndView  deleteUser( @ModelAttribute User deluser) {
-
-        userService.removeUserById(deluser.getId());
-        System.out.println("deleted");
-
+        try {
+            userService.removeUserById(deluser.getId());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
         return new ModelAndView("UserSuccessPage");
 
     }

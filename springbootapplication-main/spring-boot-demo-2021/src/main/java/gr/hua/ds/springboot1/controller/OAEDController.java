@@ -35,35 +35,48 @@ public class OAEDController {
 
     @GetMapping("/confirmation")
     public ModelAndView seeAllAppl(Model model) {
-        model.addAttribute("allapl",applicationService.getApplicationsforOAED());
-        model.addAttribute("appl", new Application());
+        try {
+            model.addAttribute("allapl",applicationService.getApplicationsforOAED());
+            model.addAttribute("appl", new Application());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
         return new ModelAndView("confirmation-page");
     }
     @PostMapping("/confirmation")
     public ModelAndView ChooseAppl(@Validated @ModelAttribute Application app, Model model){
-        Application app1=applicationService.getApplicationforOAED(app.getAid());
-        tempApp = app1;
-        //System.out.println(tempApp.toString());
-        model.addAttribute("applica", app1);
+        try {
+            Application app1=applicationService.getApplicationforOAED(app.getAid());
+            tempApp = app1;
+            //System.out.println(tempApp.toString());
+            model.addAttribute("applica", app1);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
         return new ModelAndView("OAEDregectaccept");
     }
 
     @GetMapping("/confirmation/accept")
     public ModelAndView acceptAppl() {
+        try {
+            tempApp.setApplicationstatus(1);
+            applicationService.saveApplication(tempApp);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
 
-        tempApp.setApplicationstatus(1);
-        applicationService.saveApplication(tempApp);
         return new ModelAndView("UserSuccessPage");
     }
 
     @GetMapping("/confirmation/deny")
     public ModelAndView denyAppl() {
-        //applicationService.saveApplication(tempApp);
-        //applicationService.removeApplication(tempApp);
-        //System.out.println(tempApp.toString());
-        tempApp.getUser().rmvFromApplications(tempApp);
-        applicationService.delete(tempApp.getAid());
-        //System.out.println(tempApp.toString());
+        try {
+            tempApp.getUser().rmvFromApplications(tempApp);
+            applicationService.delete(tempApp.getAid());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
         return new ModelAndView("UserSuccessPage");
     }
 

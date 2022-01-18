@@ -82,16 +82,27 @@ public class HomeController {
         user.setAuthority("ROLE_UNEMPLOYED");
         user.setEnabled(1);
         user.setEmail("-");
-        user.setPassword(encodepass.passwordEncoder().encode(user.getPassword()));
-        userService.saveUser(user);
+
+        try {
+            user.setPassword(encodepass.passwordEncoder().encode(user.getPassword()));
+            userService.saveUser(user);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
         return new ModelAndView("UserSuccessPage");
     }
     @GetMapping("/deleteAccount")
     public ModelAndView deleteAccount(@ModelAttribute User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        User currentUser=userService.getUserByUsername(currentUserName);
-        userService.removeUser(currentUser);
+
+        try {
+            User currentUser=userService.getUserByUsername(currentUserName);
+            userService.removeUser(currentUser);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
         return new ModelAndView("api-page");
     }
 
