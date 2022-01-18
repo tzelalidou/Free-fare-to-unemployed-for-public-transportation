@@ -86,6 +86,13 @@ public class HomeController {
         userService.saveUser(user);
         return new ModelAndView("UserSuccessPage");
     }
-    
+    @GetMapping("/deleteAccount")
+    public ModelAndView deleteAccount(@ModelAttribute User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        User currentUser=userService.getUserByUsername(currentUserName);
+        userService.removeUser(currentUser);
+        return new ModelAndView("api-page");
+    }
 
 }
