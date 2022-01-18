@@ -6,6 +6,10 @@ import gr.hua.ds.springboot1.repository.ApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -97,5 +101,36 @@ public class ApplicationService {
     // remove application by id
     public void removeApplicationById(int id) {
         applicationRepository.deleteById(id);
+    }
+
+    private Connection connect() {
+        String username = "root";
+        String password = "root";
+        // SQLite connection string
+        String url = "jdbc:mysql://localhost:3306/userlist?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url,username,password);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
+    public void delete(int id) {
+
+        //String sql = "DELETE FROM `userlist`.`application` WHERE (`aid` = '?');";
+        String sql = "DELETE FROM userlist.application WHERE aid = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, id);
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

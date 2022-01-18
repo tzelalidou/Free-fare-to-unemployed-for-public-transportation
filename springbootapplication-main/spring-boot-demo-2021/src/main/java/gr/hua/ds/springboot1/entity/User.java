@@ -46,8 +46,7 @@ public class User {
         this.enabled = enabled;
     }
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="user", fetch =FetchType.EAGER,
-    orphanRemoval = true)
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER ,orphanRemoval = true)
     private List<Application> applications=new ArrayList<>();
 
     public String getFirstName() {

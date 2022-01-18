@@ -4,22 +4,32 @@ import gr.hua.ds.springboot1.entity.Application;
 import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.service.ApplicationService;
 import gr.hua.ds.springboot1.service.UserService;
-import org.springframework.stereotype.Controller;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.dao.DataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.EntityManager;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/oaed")
 public class OAEDController {
-
+    private  final UserService userService;
     private final ApplicationService applicationService;
     public Application tempApp;
 
-    public OAEDController( ApplicationService applicationService) {
+    public OAEDController(UserService userService, ApplicationService applicationService) {
+        this.userService = userService;
         this.applicationService = applicationService;
     }
 
@@ -33,9 +43,7 @@ public class OAEDController {
     public ModelAndView ChooseAppl(@Validated @ModelAttribute Application app, Model model){
         Application app1=applicationService.getApplicationforOAED(app.getAid());
         tempApp = app1;
-        tempApp.getUser().addInApplications(tempApp);
-
-        System.out.println(tempApp.toString());
+        //System.out.println(tempApp.toString());
         model.addAttribute("applica", app1);
         return new ModelAndView("OAEDregectaccept");
     }
@@ -50,12 +58,14 @@ public class OAEDController {
 
     @GetMapping("/confirmation/deny")
     public ModelAndView denyAppl() {
-
-        tempApp.getUser().rmvFromApplications(tempApp);
+        //applicationService.saveApplication(tempApp);
         //applicationService.removeApplication(tempApp);
-        System.out.println(tempApp.getUser().getId());
-        System.out.println(tempApp.getUser().getApplications().get(0).toString());
+        //System.out.println(tempApp.toString());
+        tempApp.getUser().rmvFromApplications(tempApp);
+        applicationService.delete(tempApp.getAid());
+        //System.out.println(tempApp.toString());
         return new ModelAndView("UserSuccessPage");
     }
+
 
 }

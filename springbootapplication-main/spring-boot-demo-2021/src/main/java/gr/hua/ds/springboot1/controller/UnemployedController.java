@@ -44,15 +44,14 @@ public class UnemployedController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
-        //add in application of user the current application
-        userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
-        appl.getUser().addInApplications(appl);
         appl.setApplicationstatus(0);
         appl.setImgname("image");
+        //add in list of applications of user the current application(appl)
+        userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
         //appl.setImgname("img"+currentPrincipalName.hashCode()+appl.getAmkanumber().hashCode());
         // save to server.
         applicationService.saveApplication(appl);
-
+        userService.saveUser(userService.getUnemployedUserByUsername(currentPrincipalName));
         return new ModelAndView("UserSuccessPage");
     }
 

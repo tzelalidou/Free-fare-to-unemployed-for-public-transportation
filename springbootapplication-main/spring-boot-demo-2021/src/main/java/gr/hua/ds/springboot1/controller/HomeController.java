@@ -86,8 +86,6 @@ public class HomeController {
         userService.saveUser(user);
         return new ModelAndView("UserSuccessPage");
     }
-
-
-
+    
 
 }

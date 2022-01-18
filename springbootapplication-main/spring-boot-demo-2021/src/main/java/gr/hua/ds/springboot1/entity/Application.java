@@ -123,6 +123,7 @@ public class Application {
                 ", yearofunemployment='" + yearofunemployment + '\'' +
                 ", applicationstatus=" + applicationstatus +
                 ", imgname='" + imgname + '\'' +
+                ", user=" + user.getUsername() +
                 '}';
     }
 }
