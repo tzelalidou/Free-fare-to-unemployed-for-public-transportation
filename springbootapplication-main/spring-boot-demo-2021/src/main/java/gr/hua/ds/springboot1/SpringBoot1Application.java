@@ -1,5 +1,6 @@
 package gr.hua.ds.springboot1;
 
+import gr.hua.ds.springboot1.config.WebSecurityConfig;
 import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.service.UserService;
 import org.springframework.boot.SpringApplication;

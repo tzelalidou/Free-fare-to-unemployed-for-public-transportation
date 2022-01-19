@@ -1,5 +1,6 @@
 package gr.hua.ds.springboot1.controller;
 
+import gr.hua.ds.springboot1.config.WebSecurityConfig;
 import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.service.UserService;
 
@@ -31,7 +32,9 @@ public class AdminController {
     public ModelAndView createUser(@Validated @ModelAttribute User newuser, Model model){
         model.addAttribute("newuser", newuser);
         try {
+            System.out.println(newuser.getPassword());
             newuser.setPassword(passwordEncoder.encode(newuser.getPassword()));
+            System.out.println(newuser.getPassword());
             newuser.setEnabled(1);
             userService.saveUser(newuser);
         } catch (Exception e){
@@ -41,32 +44,62 @@ public class AdminController {
         return new ModelAndView("UserSuccessPage");
 
     }
-
-    @RequestMapping("/alter")
-    public ModelAndView alterUser() {
-        return new ModelAndView("alter-page");
-    }
-
-    @GetMapping("/delete")
-    public ModelAndView seeDeleteUser(Model model) {
+    @GetMapping("/seeusers")
+    public ModelAndView seeUsers(Model model) {
         try {
+
             model.addAttribute("allusers",userService.getUsersExceptUnemployed());
-            model.addAttribute("deluser", new User());
+            model.addAttribute("user", new User());
         } catch (Exception e){
             return new ModelAndView("error-page");
         }
 
-        return new ModelAndView("delete-page");
+        return new ModelAndView("chooseUser-page");
     }
-    @PostMapping("/delete")
-    public ModelAndView  deleteUser( @ModelAttribute User deluser) {
+    @PostMapping("/seeusers")
+    public ModelAndView users(Model model,@ModelAttribute User user) {
         try {
-            userService.removeUserById(deluser.getId());
+
+            userService.removeUserById(user.getId());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+
+        return new ModelAndView("UserSuccessPage");
+    }
+    @GetMapping(value="/seeusers/alter/{userid}")
+    @ResponseBody
+    public ModelAndView  alter_form(@PathVariable("userid") String uid,Model model) {
+        try {
+            int id=Integer.parseInt(uid);
+            User auser=userService.getUser(id);
+            //String pass=WebSecurityConfig.decrypt(user.getPassword());
+            model.addAttribute("auser",auser);
+            model.addAttribute("nuser",new User());
+            System.out.println(auser.toString());
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+        return new ModelAndView("Alterform-page");
+    }
+    @PostMapping("/seeusers/alter/{userid}")
+    public ModelAndView  doalterUser(@PathVariable("userid") String uid,@ModelAttribute User nuser) {
+        try {
+            //admin must write again all the element's  even if the value has changed or not
+            int id=Integer.parseInt(uid);
+            User auser=userService.getUser(id);
+            auser.setFirstName(nuser.getFirstName());
+            auser.setLastName(nuser.getLastName());
+            auser.setAuthority(nuser.getAuthority());
+            auser.setEmail(nuser.getEmail());
+            auser.setUsername(nuser.getUsername());
+            auser.setPassword(passwordEncoder.encode(nuser.getPassword()));
+            auser.setEnabled(nuser.getEnabled());
+            userService.saveUser(auser);
         } catch (Exception e){
             return new ModelAndView("error-page");
         }
         return new ModelAndView("UserSuccessPage");
-
     }
 
 

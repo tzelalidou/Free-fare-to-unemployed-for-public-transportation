@@ -72,19 +72,13 @@
         location.href = "/admin/add";
     };
 </script>
-<input type="button" class="button" value="Alter User" id="alterbtn" >
+<input type="button" class="button" value="Edit Users" id="editbtn" >
 <script type="text/javascript">
-document.getElementById("alterbtn").onclick = function () {
-location.href = "/admin/alter";
+document.getElementById("editbtn").onclick = function () {
+location.href = "/admin/seeusers";
 };
 </script>
 
-<input type="button" class="button"  value="Delete User" id="deletebtn" >
-<script type="text/javascript">
-    document.getElementById("deletebtn").onclick = function () {
-        location.href = "/admin/delete";
-    };
-</script>
 <input type="button" class="button" value="Logout" id="out" >
 <script type="text/javascript">
     document.getElementById("out").onclick = function () {

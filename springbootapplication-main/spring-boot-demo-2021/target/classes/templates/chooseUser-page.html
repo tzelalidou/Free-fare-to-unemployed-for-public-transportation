@@ -28,6 +28,8 @@
         text-align: center;
         width: 100%;
         float: left;
+        margin-top: 10px;
+
     }
 
     .button:active {
@@ -71,11 +73,18 @@
                 </tbody>
             </table>
 
-            <form action="#" method="post" th:action="@{/admin/delete}" th:object="${deluser}">
+            <form action="#" method="post" th:action="@{/admin/seeusers}"  th:object="${user}">
                 <div class="center2">
 
                 <input type="text" th:field="*{id}"  class="button" placeholder="Put the Id" name="uid" id="uid" required>
-                <input type="submit" class="button" value="Submit" >
+                <input type="button" class="button" value="Alter User" id="alter" >
+                    <script type="text/javascript">
+                        document.getElementById("alter").onclick = function () {
+                            let userid = document.getElementById('uid').value;
+                            location.href = "/admin/seeusers/alter/"+userid;
+                        };
+                    </script>
+                    <input type="submit" class="button" value="Delete User" >
                 <input type="button" class="button" value="Go to Home Page" id="home" >
                 <script type="text/javascript">
                     document.getElementById("home").onclick = function () {
@@ -90,5 +99,8 @@
                 </script>
                 </div>
             </form>
+
+
+
 </body>
 </html>
