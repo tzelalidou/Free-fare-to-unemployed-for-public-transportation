@@ -10,8 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
@@ -21,7 +25,7 @@ import java.util.Locale;
 @RestController
 @RequestMapping("/unemployed")
 public class UnemployedController {
-
+    private final String UPLOAD_DIR = "C:\\temp\\";
     private UserService userService;
     private ApplicationService applicationService;
 
@@ -44,13 +48,19 @@ public class UnemployedController {
     }
 
     @PostMapping("/application")
-    public ModelAndView seeResults(@ModelAttribute("appl") Application appl) {
+    public ModelAndView seeResults(@RequestParam("avatar") MultipartFile file,@ModelAttribute("appl") Application appl) {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
             appl.setApplicationstatus(0);
-            appl.setImgname("image");
+            appl.setImgname("img"+Long.toString(appl.getAmkanumber()).hashCode()+".jpg");
+
+            // save image in local file
+            Path currentPath = Paths.get("");
+            Path absPath = currentPath.toAbsolutePath();
+            Path path = Paths.get(absPath + "\\springbootapplication-main\\spring-boot-demo-2021\\src\\main\\resources\\img\\"+appl.getImgname());
+            Files.copy(file.getInputStream(), path);
             //add in list of applications of user the current application(appl)
             userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
             //appl.setImgname("img"+currentPrincipalName.hashCode()+appl.getAmkanumber().hashCode());
@@ -62,6 +72,8 @@ public class UnemployedController {
         }
         return new ModelAndView("UserSuccessPage");
     }
+
+
     @GetMapping("/myapplications")
     public ModelAndView showApplications(Model model) {
         try {
@@ -72,6 +84,19 @@ public class UnemployedController {
             return new ModelAndView("error-page");
         }
         return new ModelAndView("myapplications-page");
+    }
+    @GetMapping("/deleteAccount")
+    public ModelAndView deleteAccount(@ModelAttribute User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        try {
+            User currentUser=userService.getUserByUsername(currentUserName);
+            userService.removeUser(currentUser);
+        } catch (Exception e){
+            return new ModelAndView("error-page");
+        }
+        return new ModelAndView("api-page");
     }
 
 }

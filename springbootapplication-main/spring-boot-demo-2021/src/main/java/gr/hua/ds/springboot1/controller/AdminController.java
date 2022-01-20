@@ -94,7 +94,7 @@ public class AdminController {
             auser.setEmail(nuser.getEmail());
             auser.setUsername(nuser.getUsername());
             auser.setPassword(passwordEncoder.encode(nuser.getPassword()));
-            auser.setEnabled(nuser.getEnabled());
+            auser.setEnabled(1);
             userService.saveUser(auser);
         } catch (Exception e){
             return new ModelAndView("error-page");

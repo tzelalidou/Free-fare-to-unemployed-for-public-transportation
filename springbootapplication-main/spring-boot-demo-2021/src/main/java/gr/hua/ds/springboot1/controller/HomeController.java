@@ -24,9 +24,9 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+    public ModelAndView greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+
+        return new ModelAndView("api-page");
     }
     //edw to template gia na dei t application toy
     @RequestMapping("/unemployed")
@@ -92,19 +92,7 @@ public class HomeController {
 
         return new ModelAndView("UserSuccessPage");
     }
-    @GetMapping("/deleteAccount")
-    public ModelAndView deleteAccount(@ModelAttribute User user) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = authentication.getName();
 
-        try {
-            User currentUser=userService.getUserByUsername(currentUserName);
-            userService.removeUser(currentUser);
-        } catch (Exception e){
-            return new ModelAndView("error-page");
-        }
-        return new ModelAndView("api-page");
-    }
 
 
 }

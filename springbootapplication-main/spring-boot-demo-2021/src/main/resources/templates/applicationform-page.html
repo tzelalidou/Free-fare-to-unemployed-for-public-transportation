@@ -151,7 +151,7 @@
 </style>
 
 <body>
-<form action="#" th:action="@{/unemployed/application}" th:object="${appl}" method="post">
+<form action="#" th:action="@{/unemployed/application}" th:object="${appl}" method="post" enctype="multipart/form-data">
     <div class="form">
         <div class="title">Welcome</div>
 
@@ -166,7 +166,7 @@
 
 
         <div class="input-container ic1">
-    <input type="text" th:field="*{birthdate}"  class="input" id="birth" placeholder=" " name="birth" maxlength="50" required> <br>
+            <input type="text" th:field="*{birthdate}"  class="input" id="birth" placeholder=" " name="birth" maxlength="50" required> <br>
             <div class="cut"></div>
             <label for="birth" class="placeholder"><b>Birthdate</b></label>
         </div>
@@ -175,7 +175,7 @@
 
 
         <div class="input-container ic1">
-    <input type="text" th:field="*{address}" class="input" id="address" placeholder=" "  maxlength="50" required> <br>
+            <input type="text" th:field="*{address}" class="input" id="address" placeholder=" "  maxlength="50" required> <br>
             <div class="cut cut-short"></div>
             <label for="address" class="placeholder"><b>Address</b></label>
         </div>
@@ -183,7 +183,7 @@
 
 
         <div class="input-container ic1">
-    <input type="text" th:field="*{yearofunemployment}" class="input" placeholder=" " id="unemployedate"  maxlength="50" required> <br>
+            <input type="text" th:field="*{yearofunemployment}" class="input" placeholder=" " id="unemployedate"  maxlength="50" required> <br>
             <div class="cut"></div>
             <label for="unemployedate" class="placeholder"><b>Unemployed date(e.g:12-3-2000)</b></label>
         </div>
@@ -196,14 +196,14 @@
 
 
 
-    <input type="submit" class="button" value="Submit" >
-    <input type="button" class="button" value="Logout" id="logout" >
-    <script type="text/javascript">
-          document.getElementById("logout").onclick = function () {
-          location.href = "/logout";
-          };
-    </script>
-        </div>
+        <input type="submit" class="button" value="Submit" >
+        <input type="button" class="button" value="Logout" id="logout" >
+        <script type="text/javascript">
+            document.getElementById("logout").onclick = function () {
+                location.href = "/logout";
+            };
+        </script>
+    </div>
 
 </form>
 

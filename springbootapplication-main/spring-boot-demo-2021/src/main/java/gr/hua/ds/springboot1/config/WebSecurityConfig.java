@@ -41,14 +41,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/unemployed").hasAnyRole("UNEMPLOYED")
-                .antMatchers("/admin").hasAnyRole("ADMIN")
-                .antMatchers("/oaed").hasAnyRole("OAED")
-                .antMatchers("/oasa").hasAnyRole("OASA")
+                .antMatchers("/unemployed/**").hasAnyRole("UNEMPLOYED")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/oaed/**").hasAnyRole("OAED")
+                .antMatchers("/oasa/**").hasAnyRole("OASA")
+                .antMatchers("/api").permitAll()
+                .antMatchers("/home").hasAnyRole("UNEMPLOYED","ADMIN","OAED","OASA")
                 .and().formLogin()
                 .successHandler(successHandler)
                 .permitAll()
                 .and().logout();
+
+
+        http.httpBasic().and().authorizeRequests()
+                .antMatchers("/**").hasRole("ADMIN")
+                .and().csrf().disable().headers().frameOptions().disable()
+                .and().formLogin().permitAll().and().logout().permitAll();
+
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
