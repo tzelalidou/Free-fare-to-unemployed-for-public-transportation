@@ -4,6 +4,8 @@ import gr.hua.ds.springboot1.config.WebSecurityConfig;
 import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.service.UserService;
 
+import net.bytebuddy.utility.privilege.GetMethodAction;
+import org.apache.tomcat.jni.Error;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 
@@ -22,6 +24,7 @@ public class AdminController {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
+
 
     @GetMapping("/add")
     public ModelAndView addUser(Model model) {

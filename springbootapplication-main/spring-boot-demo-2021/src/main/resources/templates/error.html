@@ -13,7 +13,7 @@
         --button-color: #0a0a0a;
         --shadow: #000000;
         --bg: #737373;
-        --header: #ffffff;
+        --header: #7a7a7a;
         --color: #fafafa;
         --lit-header: #e6e6e6;
         --speed: 2s;
@@ -48,26 +48,25 @@
         font-weight: 100;
     }
     h1 {
-        font-size: clamp(5rem, 40vmin, 20rem);
+        font-size: clamp(4rem, 30vmin, 20rem);
         font-family: 'Open Sans', sans-serif;
         margin: 0;
+        color: #1c1a1a;
         margin-bottom: 1rem;
         letter-spacing: 1rem;
-        transform: translate3d(0, 0, 0vmin);
-        --x: calc(50% + (var(--swing-x) * 0.5) * 1%);
         background: radial-gradient(var(--lit-header), var(--header) 45%) var(--x) 100%/200% 200%;
         -webkit-background-clip: text;
     }
     h1:after {
         -webkit-animation: swing var(--speed) infinite alternate ease-in-out;
         animation: swing var(--speed) infinite alternate ease-in-out;
-        content: "404";
+        content: "403";
         position: absolute;
         top: 0;
         left: 0;
         color: var(--shadow);
-        filter: blur(1.5vmin);
-        transform: scale(1.05) translate3d(0, 12%, -10vmin) translate(calc((var(--swing-x, 0) * 0.05) * 1%), calc((var(--swing-y) * 0.05) * 1%));
+        filter: blur(1.4vmin);
+        );
     }
     .cloak {
         animation: swing var(--speed) infinite alternate-reverse ease-in-out;
@@ -147,15 +146,15 @@
     }
 </style>
 <body>
-<h1>Oops!</h1>
+<h1>Sorry:(</h1>
 <div class="cloak__wrapper">
     <div class="cloak__container">
         <div class="cloak"></div>
     </div>
 </div>
 <div class="info">
-    <h2>We can't find this page</h2>
-    <p>We're fairly sure that page used to be here, but seems to have gone missing. We do apologise on it's behalf.</p>
+    <h2>This page is forbidden for you.</h2>
+    <p>You can't access this page.Please go to your home.</p>
     <input type="button" class="button" value="home" id="home" >
     <script type="text/javascript">
         document.getElementById("home").onclick = function () {
