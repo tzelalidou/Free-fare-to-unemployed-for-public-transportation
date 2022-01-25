@@ -9,8 +9,8 @@
         color: #37356e;
     }
     th, td {
-        color: #f7fafd;
-        background-color: #1d6185;
+        color: #163d5b;
+        background-color: white;
         border-radius: 12px;
     }
     .center {
@@ -29,7 +29,6 @@
         text-align: center;
         width: 100%;
         float: left;
-        margin-top:567px ;
 
     }
 
@@ -40,7 +39,7 @@
         float: left;
         margin: 0;
         position: absolute;
-        top: 20%;
+        top: 50%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
@@ -48,6 +47,7 @@
 
 
     }
+
 </style>
 <body>
 <table class="center">
@@ -58,22 +58,32 @@
         <th>Birthdate</th>
         <th>Address</th>
         <th>Year of Unemployment</th>
-        <th>Imgname</th>
         <th>Application status</th>
         <th>Username of Owner</th>
+        <th>Owner Image </th>
+
+
+
+
     </tr>
     </thead>
     <tbody>
 
     <tr th:each="ap:${applica}">
-        <td th:text="${ap.aid}"></td>
-        <td th:text="${ap.amkanumber}"></td>
-        <td th:text="${ap.birthdate}"></td>
-        <td th:text="${ap.address}"></td>
-        <td th:text="${ap.yearofunemployment}"></td>
-        <td th:text="${ap.imgname}"></td>
-        <td th:text="${ap.applicationstatus}"></td>
-        <td th:text="${ap.user.getUsername()}"></td>
+        <td th:text="${applica.aid}"></td>
+        <td th:text="${applica.amkanumber}"></td>
+        <td th:text="${applica.birthdate}"></td>
+        <td th:text="${applica.address}"></td>
+        <td th:text="${applica.yearofunemployment}"></td>
+        <td th:text="${applica.applicationstatus}"></td>
+        <td th:text="${applica.user.getUsername()}"></td>
+        <div id="im" th:with="imagename=${applica.imgname}">
+        <td>
+            <img alt="Avatar"  id="img"  th:src="@{'C:/Users/tzela/IdeaProjects/springbootapplication/springbootapplication-main/spring-boot-demo-2021/src/main/resources/templates/img/'+${applica.imgname}}" >
+
+        </td>
+        </div>
+
     </tr>
     </tbody>
 </table>

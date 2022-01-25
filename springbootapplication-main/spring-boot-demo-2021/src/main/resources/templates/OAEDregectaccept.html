@@ -7,6 +7,7 @@
 <style>
     table {
         color: #37356e;
+        margin: auto;
     }
     th, td {
         color: #f7fafd;
@@ -16,6 +17,8 @@
     .center {
         margin-left: auto;
         margin-right: auto;
+        margin-top: auto;
+
     }
     .button {
         background-color: #08d;
@@ -29,7 +32,7 @@
         text-align: center;
         width: 100%;
         float: left;
-        margin-top:567px ;
+
 
     }
 
@@ -38,16 +41,14 @@
     }
     .center2 {
         float: left;
-        margin: 0;
         position: absolute;
-        top: 20%;
+        top: 50%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         display: flex;
-
-
     }
+
 </style>
 <body>
 <table class="center">
@@ -58,22 +59,26 @@
         <th>Birthdate</th>
         <th>Address</th>
         <th>Year of Unemployment</th>
-        <th>Imgname</th>
         <th>Application status</th>
         <th>Username of Owner</th>
+        <th> Image name </th>
+
+
+
+
     </tr>
     </thead>
     <tbody>
 
     <tr th:each="ap:${applica}">
-        <td th:text="${ap.aid}"></td>
-        <td th:text="${ap.amkanumber}"></td>
-        <td th:text="${ap.birthdate}"></td>
-        <td th:text="${ap.address}"></td>
-        <td th:text="${ap.yearofunemployment}"></td>
-        <td th:text="${ap.imgname}"></td>
-        <td th:text="${ap.applicationstatus}"></td>
-        <td th:text="${ap.user.getUsername()}"></td>
+        <td th:text="${applica.aid}"></td>
+        <td th:text="${applica.amkanumber}"></td>
+        <td th:text="${applica.birthdate}"></td>
+        <td th:text="${applica.address}"></td>
+        <td th:text="${applica.yearofunemployment}"></td>
+        <td th:text="${applica.applicationstatus}"></td>
+        <td th:text="${applica.user.getUsername()}"></td>
+        <td th:text="${applica.imgname}"></td>
     </tr>
     </tbody>
 </table>
@@ -88,6 +93,5 @@
         };
     </script>
 </div>
-
 </body>
 </html>

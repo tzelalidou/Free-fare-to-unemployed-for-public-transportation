@@ -5,7 +5,12 @@ import gr.hua.ds.springboot1.repository.ApplicationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -143,5 +148,28 @@ public class ApplicationService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void saveFileFromApplication( MultipartFile file,Application appl) throws IOException {
+        // save image in local file
+        Path currentPath = Paths.get("");
+        Path absPath = currentPath.toAbsolutePath();
+        Path path = Paths.get(absPath + "\\springbootapplication-main\\spring-boot-demo-2021\\src\\main\\resources\\img\\"+appl.getImgname());
+        System.out.println(path);
+        Files.copy(file.getInputStream(), path);
+
+    }
+    public void saveFileFromApplicationInC( MultipartFile file,Application appl) throws IOException {
+        // save image in local file
+        String UPLOAD_DIR = "C:img";
+        Path path = Paths.get(UPLOAD_DIR +appl.getImgname());
+        Files.copy(file.getInputStream(), path);
+    }
+    public void saveByteImgFromApplicationInC( MultipartFile file,Application appl) throws IOException {
+        // save image in local file
+        String UPLOAD_DIR = "C:img";
+        byte [] bytes=appl.getImgname().getBytes();
+        Path path = Paths.get(UPLOAD_DIR +appl.getImgname());
+        Files.write(path,bytes);
     }
 }

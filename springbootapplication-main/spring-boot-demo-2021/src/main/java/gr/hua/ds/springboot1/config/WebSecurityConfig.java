@@ -3,6 +3,7 @@ package gr.hua.ds.springboot1.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -53,10 +54,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout();
 
 
+/*
         http.httpBasic().and().authorizeRequests()
-                .antMatchers("/**").hasRole("ADMIN")
-                .and().csrf().disable().headers().frameOptions().disable()
-                .and().formLogin().permitAll().and().logout().permitAll();
+                .antMatchers("/**").hasAnyRole("ADMIN","OAED","OASA","UNEMPLOYED")
+                .and().csrf().disable().headers().frameOptions().disable();
+
+ */
+
 
     }
     @Override

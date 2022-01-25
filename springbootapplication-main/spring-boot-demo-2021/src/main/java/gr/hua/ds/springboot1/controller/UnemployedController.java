@@ -3,31 +3,19 @@ import gr.hua.ds.springboot1.entity.Application;
 import gr.hua.ds.springboot1.entity.User;
 import gr.hua.ds.springboot1.service.ApplicationService;
 import gr.hua.ds.springboot1.service.UserService;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/unemployed")
 public class UnemployedController {
-    private final String UPLOAD_DIR = "C:\\temp\\";
-    private UserService userService;
-    private ApplicationService applicationService;
+    private final UserService userService;
+    private final ApplicationService applicationService;
 
     public UnemployedController(UserService userService, ApplicationService applicationService) {
         this.userService = userService;
@@ -50,23 +38,28 @@ public class UnemployedController {
     @PostMapping("/application")
     public ModelAndView seeResults(@RequestParam("avatar") MultipartFile file,@ModelAttribute("appl") Application appl) {
         try {
+
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
             appl.setApplicationstatus(0);
-            appl.setImgname("img"+Long.toString(appl.getAmkanumber()).hashCode()+".jpg");
+            appl.setImgname("templates/img" +Long.toString(appl.getAmkanumber()).hashCode()+".jpg");
 
-            // save image in local file
-            Path currentPath = Paths.get("");
-            Path absPath = currentPath.toAbsolutePath();
-            Path path = Paths.get(absPath + "\\springbootapplication-main\\spring-boot-demo-2021\\src\\main\\resources\\img\\"+appl.getImgname());
-            Files.copy(file.getInputStream(), path);
+
+            applicationService.saveFileFromApplication(file,appl);
+            //applicationService.saveByteImgFromApplicationInC(file,appl);
+            //applicationService.saveFileFromApplicationInC(file,appl);
+
+
+            System.out.println("a");
             //add in list of applications of user the current application(appl)
             userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
-            //appl.setImgname("img"+currentPrincipalName.hashCode()+appl.getAmkanumber().hashCode());
+            System.out.println("11111");
             // save to server.
             applicationService.saveApplication(appl);
+            System.out.println("1");
             userService.saveUser(userService.getUnemployedUserByUsername(currentPrincipalName));
+            System.out.println("11");
         } catch (Exception e){
             return new ModelAndView("error-page");
         }
