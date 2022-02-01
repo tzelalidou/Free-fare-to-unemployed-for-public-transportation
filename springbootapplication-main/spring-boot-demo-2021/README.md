@@ -44,3 +44,18 @@ Unemployed:
 Installation
 git clone https://github.com/tzelalidou/springbootapp.git
 
+
+
+Some Sql data to insert
+
+
+INSERT INTO `user` (`first_name`,`last_name`,`email`,`username`, `password`, `enabled`,`authority`) VALUES                                                                                                        ('argiris','tsadimas','argiristsad@gmail.com','argiris', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_UNEMPLOYED'),
+                                 ('marianthi','karvoynh','marianthikarv@gmail.com','marianthi', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_OAED'),
+                                 ('lefteris','xasan','lefxasan@gmail.com','lefteris', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_OASA'),
+                                ('maria','dhmoy','mariadhmoyd@gmail.com','root', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 1,'ROLE_ADMIN');
+
+
+INSERT INTO `application` (`amkaNumber`,`birthDate`,`address`, `yearOfUnemployment`, `imgName`,`user_id`,`applicationStatus`) VALUES
+                          ('15101993294','1993/10/15','Kapadokias 25','2007/03/07', 'mypic.jpg',23, 1),
+                          ('11081999260','1999/08/11','Pyrgou 13','2004/01/19', 'me.jpg',23, 1),
+                          ('81123456760','1964/08/11','Sanou 172','2014/12/29', 'image.jpg',23, 1);
