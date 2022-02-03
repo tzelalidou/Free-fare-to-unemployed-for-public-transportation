@@ -43,7 +43,7 @@ public class UnemployedController {
             String currentPrincipalName = authentication.getName();
             appl.setUser(userService.getUnemployedUserByUsername(currentPrincipalName));
             appl.setApplicationstatus(0);
-            appl.setImgname("templates/img" +Long.toString(appl.getAmkanumber()).hashCode()+".jpg");
+            appl.setImgname("img" +Long.toString(appl.getAmkanumber()).hashCode()+".jpg");
 
 
             applicationService.saveFileFromApplication(file,appl);
@@ -51,15 +51,13 @@ public class UnemployedController {
             //applicationService.saveFileFromApplicationInC(file,appl);
 
 
-            System.out.println("a");
+
             //add in list of applications of user the current application(appl)
             userService.getUnemployedUserByUsername(currentPrincipalName).addInApplications(appl);
-            System.out.println("11111");
+
             // save to server.
             applicationService.saveApplication(appl);
-            System.out.println("1");
             userService.saveUser(userService.getUnemployedUserByUsername(currentPrincipalName));
-            System.out.println("11");
         } catch (Exception e){
             return new ModelAndView("error-page");
         }

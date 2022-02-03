@@ -21,26 +21,28 @@ public class ExceptionResolver {
     public HashMap<String, String> handleException(HttpServletRequest request, Exception e) {
         HashMap<String, String> response = new HashMap<>();
         response.put("message", e.getMessage());
-        System.out.println("FGdg");
+
         return response;
     }
 
     @ExceptionHandler(MissingPathVariableException.class)
     public ModelAndView handleMissingPathVariableException(HttpServletRequest request, MissingPathVariableException e) {
         HashMap<String, String> response = new HashMap<>();
-        System.out.println("FGdg");
+
         response.put("message", "Required path variable is missing in this request. Please add it to your request.");
         return new ModelAndView("error-page");
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public ModelAndView handleNotFoundResourceException(HttpServletRequest request, NoHandlerFoundException e) {
-        System.out.println("FGdg");
         return new ModelAndView("error-page");
     }
+
     @ExceptionHandler({AuthenticationException.class, AccessDeniedException.class, TemplateInputException.class})
     public ModelAndView handleNotFoundResourceException(HttpServletRequest request) {
-        System.out.println("FGdg");
+
         return new ModelAndView("error-page");
     }
+
+
 }

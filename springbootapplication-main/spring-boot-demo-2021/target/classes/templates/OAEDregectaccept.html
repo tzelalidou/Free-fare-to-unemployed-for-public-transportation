@@ -7,15 +7,18 @@
 <style>
     table {
         color: #37356e;
+        margin: auto;
     }
     th, td {
-        color: #163d5b;
-        background-color: white;
+        color: #f7fafd;
+        background-color: #1d6185;
         border-radius: 12px;
     }
     .center {
         margin-left: auto;
         margin-right: auto;
+        margin-top: auto;
+
     }
     .button {
         background-color: #08d;
@@ -30,6 +33,7 @@
         width: 100%;
         float: left;
 
+
     }
 
     .button:active {
@@ -37,15 +41,12 @@
     }
     .center2 {
         float: left;
-        margin: 0;
         position: absolute;
         top: 50%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         display: flex;
-
-
     }
 
 </style>
@@ -60,7 +61,7 @@
         <th>Year of Unemployment</th>
         <th>Application status</th>
         <th>Username of Owner</th>
-        <th>Owner Image </th>
+        <th> Image name </th>
 
 
 
@@ -77,13 +78,7 @@
         <td th:text="${applica.yearofunemployment}"></td>
         <td th:text="${applica.applicationstatus}"></td>
         <td th:text="${applica.user.getUsername()}"></td>
-        <div id="im" th:with="imagename=${applica.imgname}">
-        <td>
-            <img alt="Avatar"  id="img"  th:src="@{'C:/Users/tzela/IdeaProjects/springbootapplication/springbootapplication-main/spring-boot-demo-2021/src/main/resources/templates/img/'+${applica.imgname}}" >
-
-        </td>
-        </div>
-
+        <td th:text="${applica.imgname}"></td>
     </tr>
     </tbody>
 </table>
@@ -98,6 +93,5 @@
         };
     </script>
 </div>
-
 </body>
 </html>
