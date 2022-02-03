@@ -30,6 +30,7 @@ menu.
 Admin:
 * Add User (oasa,oaed employee)
 * Delete User (oasa,oaed employee)
+* Alter User(oasa,oaed employee)
 
 OASA employee:
 * Validate application
@@ -39,6 +40,7 @@ OAED employee:
 
 Unemployed:
 * Create applications
+* Delete Account
 
 
 Installation
