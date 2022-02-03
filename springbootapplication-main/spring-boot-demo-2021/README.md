@@ -41,6 +41,7 @@ OAED employee:
 Unemployed:
 * Create applications
 * Delete Account
+* Show Applications
 
 
 Installation
