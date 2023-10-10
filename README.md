@@ -1,5 +1,7 @@
 # Spring Boot Application for free fare to public transportation for the unemployees
 
+Our project aims to create a user-friendly Spring Boot web application that empowers unemployed individuals to request complimentary public transportation fares. This application will serve as a valuable resource for those facing financial hardship by providing them with an accessible platform to request and obtain free transportation services.
+
 Instructions for our WEB-APP 
 ---------------------
 
